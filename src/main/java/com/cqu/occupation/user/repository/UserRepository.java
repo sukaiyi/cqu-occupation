@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * 通过id获取
      *
      * @param id id
-     * @return User
+     * @return Crawler
      */
     @Override
     @Query("select t from User t where t.id = ?1 and t.dr = 0")
@@ -31,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @param username 用户名
      * @return user
      */
-    @Query("select t from User t where t.username = (?1) and t.dr = 0")
+    @Query("select t from User t where t.username = ?1 and t.dr = 0")
     Optional<User> findByUsername(String username);
 
 
