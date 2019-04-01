@@ -48,4 +48,11 @@ public interface UserService {
      * @return 带有token的信息
      */
     Map<String, Object> login(UserVO user);
+
+    /**
+     * 根据 Token 获得用户信息
+     * @param token token
+     * @return userVO
+     */
+    UserVO currentUser(String token);
 }

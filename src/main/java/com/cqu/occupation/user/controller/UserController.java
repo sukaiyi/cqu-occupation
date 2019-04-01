@@ -8,10 +8,7 @@ import com.cqu.occupation.global.annotation.AuthorityRequired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,5 +46,12 @@ public class UserController {
     public ResultVO login(@RequestBody UserVO user) {
         return ResultVO.ok("操作成功", userService.login(user));
     }
+
+    @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})
+    @RequestMapping(value = "currentUser", method = RequestMethod.GET)
+    public ResultVO login(@RequestHeader("token") String token) {
+        return ResultVO.ok("操作成功", userService.currentUser(token));
+    }
+
 
 }
