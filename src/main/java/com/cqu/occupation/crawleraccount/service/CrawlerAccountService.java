@@ -17,7 +17,7 @@ public interface CrawlerAccountService {
     /**
      * 列表查询全部
      *
-     * @return CrawlerAccountVO
+     * @return CrawlerAccountConnVO
      */
     List<CrawlerAccountVO> findAll();
 

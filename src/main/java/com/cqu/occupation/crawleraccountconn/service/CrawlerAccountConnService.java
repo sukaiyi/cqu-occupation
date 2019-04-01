@@ -1,8 +1,6 @@
-package com.cqu.occupation.crawler.service;
+package com.cqu.occupation.crawleraccountconn.service;
 
-import com.cqu.occupation.crawler.vo.CrawlerVO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.cqu.occupation.crawleraccountconn.vo.CrawlerAccountConnVO;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.Map;
 /**
  * @author sukaiyi
  */
-public interface CrawlerService {
+public interface CrawlerAccountConnService {
 
     /**
      * 删除全部
@@ -22,7 +20,7 @@ public interface CrawlerService {
      *
      * @return CrawlerAccountConnVO
      */
-    List<CrawlerVO> findAll();
+    Map<String, Object> findAll();
 
     /**
      * 新增一条
@@ -30,7 +28,7 @@ public interface CrawlerService {
      * @param vo user
      * @return 新增后的user
      */
-    CrawlerVO insert(CrawlerVO vo);
+    CrawlerAccountConnVO insert(CrawlerAccountConnVO vo);
 
     /**
      * 批量的新增
@@ -38,11 +36,18 @@ public interface CrawlerService {
      * @param vos users
      * @return users
      */
-    List<CrawlerVO> insert(List<CrawlerVO> vos);
+    List<CrawlerAccountConnVO> insert(List<CrawlerAccountConnVO> vos);
 
     /**
      * 按照id删除
      * @param ids id
      */
     void delete(List<Integer> ids);
+
+    /**
+     * 关联/取消关联
+     * @param accountId 账号ID
+     * @param crawlId 爬虫ID
+     */
+    void toggle(Integer accountId, Integer crawlId);
 }
