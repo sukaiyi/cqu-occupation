@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
  * @author sukaiyi
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserVO extends SuperVO {
+public class UserVO {
 	Integer id;
 	String username;
 	String password;

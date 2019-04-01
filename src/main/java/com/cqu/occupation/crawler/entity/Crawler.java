@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -20,13 +17,14 @@ import java.util.Date;
 @Table(name = "crawler")
 public class Crawler {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "crawl_id")
     private Integer crawlId;
 
     @Column(name = "data_source")
     private String dataSource;
 
-    @Column(name = "function")
+    @Column(name = "[function]")
     private String function;
 
     @Column(name = "strategy")
@@ -41,10 +39,10 @@ public class Crawler {
     @Column(name = "sleep_t2")
     private Integer sleepT2;
 
-    @Column(name = "describe")
+    @Column(name = "[describe]")
     private String describe;
 
-    @Column(name = "update")
+    @Column(name = "[update]")
     private Date update;
 
     @Column(name = "status")

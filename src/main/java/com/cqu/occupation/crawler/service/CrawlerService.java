@@ -39,4 +39,10 @@ public interface CrawlerService {
      * @return users
      */
     List<CrawlerVO> insert(List<CrawlerVO> vos);
+
+    /**
+     * 按照id删除
+     * @param ids id
+     */
+    void delete(List<Integer> ids);
 }

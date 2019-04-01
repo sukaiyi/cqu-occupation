@@ -6,10 +6,8 @@ import com.cqu.occupation.crawler.repository.CrawlerRepository;
 import com.cqu.occupation.crawler.service.CrawlerService;
 import com.cqu.occupation.crawler.vo.CrawlerVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +15,7 @@ import java.util.List;
  * @author sukaiyi
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CrawlerServiceImpl implements CrawlerService {
 
     private final CrawlerRepository repository;
@@ -49,5 +48,10 @@ public class CrawlerServiceImpl implements CrawlerService {
         List<Crawler> entities = EntityVoUtils.convert(vos, Crawler.class);
         List<Crawler> savedEntities = repository.saveAll(entities);
         return EntityVoUtils.convert(savedEntities, CrawlerVO.class);
+    }
+
+    @Override
+    public void delete(List<Integer> ids) {
+        repository.delete(ids);
     }
 }

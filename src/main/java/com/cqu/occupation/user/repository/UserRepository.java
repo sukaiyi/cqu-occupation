@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @return Crawler
      */
     @Override
-    @Query("select t from User t where t.id = ?1 and t.dr = 0")
+    @Query("select t from User t where t.id = ?1")
     Optional<User> findById(String id);
 
     /**
@@ -31,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @param username 用户名
      * @return user
      */
-    @Query("select t from User t where t.username = ?1 and t.dr = 0")
+    @Query("select t from User t where t.username = ?1")
     Optional<User> findByUsername(String username);
 
 
@@ -42,7 +42,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @return users
      */
     @Override
-    @Query("select t from User t where t.dr = 0")
+    @Query("select t from User t")
     Page<User> findAll(Pageable pageable);
 
     /**
@@ -52,14 +52,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @return 删除个数
      */
     @Modifying
-    @Query("update User t set t.dr = 1 where t.id in (?1)")
+    @Query("delete from User t where t.id in (?1)")
     int deleteByIds(List<String> ids);
 
-    /**
-     * 全部删除
-     */
-    @Override
-    @Modifying
-    @Query("update User t set t.dr = 1 where t.dr <> 0")
-    void deleteAll();
 }

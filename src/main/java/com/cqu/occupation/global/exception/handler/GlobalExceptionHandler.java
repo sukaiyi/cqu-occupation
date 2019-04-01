@@ -20,12 +20,14 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public ResponseEntity handleException(HttpServletRequest request, Exception ex) {
+		ex.printStackTrace();
 		return new ResponseEntity<>(ResultVO.error(ExceptionCode.OTHER, ex.getMessage()), HttpStatus.OK);
 	}
 
 	@ExceptionHandler(value = BusinessException.class)
 	@ResponseBody
 	public ResponseEntity handleException(HttpServletRequest request, BusinessException ex) {
+		ex.printStackTrace();
 		return new ResponseEntity<>(ResultVO.error(ex.getCode(), ex.getMessage()), HttpStatus.OK);
 	}
 

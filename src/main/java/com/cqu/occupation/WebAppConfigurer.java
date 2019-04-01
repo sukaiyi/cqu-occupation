@@ -32,7 +32,6 @@ public class WebAppConfigurer extends WebMvcConfigurationSupport {
         registry.addMapping("/**")
                 .allowedHeaders("*")
                 .allowedMethods("*")
-                .allowedOrigins("*")
-                .allowCredentials(true);
+                .allowedOrigins("*");
     }
 }

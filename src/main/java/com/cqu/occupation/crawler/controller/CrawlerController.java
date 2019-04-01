@@ -26,16 +26,16 @@ public class CrawlerController {
     private CrawlerService crawlerService;
 
     @AuthorityRequired(allow = UserType.ADMINISTRATOR)
-    @RequestMapping(value = "clear", method = RequestMethod.POST)
-    public ResultVO clear() {
-        crawlerService.clear();
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public ResultVO delete(@RequestBody List<Integer> ids) {
+        crawlerService.delete(ids);
         return ResultVO.ok("操作成功", null);
     }
 
     @AuthorityRequired(allow = UserType.ADMINISTRATOR)
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ResultVO add(@RequestBody List<CrawlerVO> factories) {
-        return ResultVO.ok("操作成功", crawlerService.insert(factories));
+    public ResultVO add(@RequestBody CrawlerVO crawler) {
+        return ResultVO.ok("操作成功", crawlerService.insert(crawler));
     }
 
     @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})
