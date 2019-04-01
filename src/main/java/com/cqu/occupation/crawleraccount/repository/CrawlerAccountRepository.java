@@ -17,7 +17,7 @@ public interface CrawlerAccountRepository extends JpaRepository<CrawlerAccount, 
      * 通过id获取
      *
      * @param id id
-     * @return CrawlerAccount
+     * @return CrawlerAccountConn
      */
     @Override
     @Query("select t from CrawlerAccount t where t.id = ?1")

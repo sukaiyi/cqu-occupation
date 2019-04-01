@@ -23,16 +23,23 @@ public class JwtUtils {
     private static final Algorithm ALGORITHM = Algorithm.HMAC256("cqu-occupation-what-is-this");
     private static final String ISSUER = "cqu-occupation";
 
+    public static DecodedJWT decodeJWT(String token) {
+        try {
+            JWTVerifier verifier = JWT.require(ALGORITHM).withIssuer(ISSUER).build();
+            return verifier.verify(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static User verifyToken(String token) {
         User user = new User();
         user.setType(UserType.TOURIST.getCode());
-        try {
-            JWTVerifier verifier = JWT.require(ALGORITHM).withIssuer(ISSUER).build();
-            DecodedJWT jwt = verifier.verify(token);
+        DecodedJWT jwt = decodeJWT(token);
+        if (jwt != null) {
             user.setUsername(jwt.getClaim("username").as(String.class));
             user.setType(jwt.getClaim("type").as(Integer.class));
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return user;
     }

@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      * 通过id获取
      *
      * @param id id
-     * @return CrawlerAccount
+     * @return CrawlerAccountConn
      */
     @Override
     @Query("select t from User t where t.id = ?1")
