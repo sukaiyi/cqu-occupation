@@ -1,4 +1,4 @@
-package com.cqu.occupation.eduexp.entity;
+package com.cqu.occupation.workexp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,43 +8,36 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name = "edu_exp")
-public class EduExp {
+public class WorkExp {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "no")
     private Integer number;
 
     @Column(name = "id")
-    private BigInteger userId;
+    private BigInteger id;
 
-    @Column(name = "sch_id")
-    private BigInteger schId;
+    @Column(name = "id")
+    private BigInteger cmpId;
 
-    @Column(name = "school")
-    private String school;
+    @Column(name = "cmp_name")
+    private String cmpName;
 
-    @Column(name = "department")
-    private String department;
+    @Column(name = "position")
+    private String position;
 
-    @Column(name = "sch_url")
-    private String schUrl;
+    @Column(name = "cmp_url")
+    private String cmpUrl;
+
+    @Column(name = "cmp_logo")
+    private String cmpLogo;
 
     @Column(name = "start")
     private String start;
 
     @Column(name = "end")
     private String end;
-
-    @Column(name = "start_month")
-    private String startMonth;
-
-    @Column(name = "end_month")
-    private String endMonth;
 
     @Column(name = "start_date")
     private String startDate;
@@ -58,19 +51,22 @@ public class EduExp {
     @Column(name = "cur")
     private String cur;
 
-    @Column(name = "degree")
-    private Integer degree;
+    @Column(name = "status")
+    private Integer status;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "sch_friends")
-    private Integer schFriends;
+    @Column(name = "critime")
+    private Date critime;
 
     @Column(name = "uptime")
-    private Date uptimes;
+    private Date uptime;
 
     @Column(name = "sys_uptime")
     private Date sysUptime;
 
+
+
 }
+
