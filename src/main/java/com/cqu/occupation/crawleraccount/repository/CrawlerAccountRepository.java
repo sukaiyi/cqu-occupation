@@ -1,6 +1,6 @@
-package com.cqu.occupation.crawler.repository;
+package com.cqu.occupation.crawleraccount.repository;
 
-import com.cqu.occupation.crawler.entity.Crawler;
+import com.cqu.occupation.crawleraccount.entity.CrawlerAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * @author sukaiyi
  */
-public interface CrawlerRepository extends JpaRepository<Crawler, Integer> {
+public interface CrawlerAccountRepository extends JpaRepository<CrawlerAccount, Integer> {
 
     /**
      * 通过id获取
@@ -20,24 +20,23 @@ public interface CrawlerRepository extends JpaRepository<Crawler, Integer> {
      * @return CrawlerAccount
      */
     @Override
-    @Query("select t from Crawler t where t.crawlId = ?1")
-    Optional<Crawler> findById(Integer id);
+    @Query("select t from CrawlerAccount t where t.id = ?1")
+    Optional<CrawlerAccount> findById(Integer id);
 
     /**
      * 查询全部
      *
-     * @param pageable 分页信息
      * @return Crawlers
      */
     @Override
-    @Query("select t from Crawler t")
-    List<Crawler> findAll();
+    @Query("select t from CrawlerAccount t")
+    List<CrawlerAccount> findAll();
 
     /**
      * 按ID删除
      * @param ids id
      */
     @Modifying
-    @Query("delete from Crawler t where t.crawlId in (?1)")
+    @Query("delete from CrawlerAccount t where t.id in (?1)")
     void delete(List<Integer> ids);
 }
