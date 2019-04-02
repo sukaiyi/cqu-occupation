@@ -16,12 +16,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_info")
-
 public class UserInfo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer userId;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -36,7 +35,7 @@ public class UserInfo {
     private String mobile;
 
     @Column(name = "birthday")
-    private String birthday；
+    private String birthday;
 
     @Column(name = "avater")
     private String avater;

@@ -8,17 +8,25 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * @author HTtech
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "work_exp")
 public class WorkExp {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "no")
-    private Integer number;
+    private Integer no;
 
     @Column(name = "id")
-    private BigInteger id;
+    private BigInteger userInfoId;
 
-    @Column(name = "id")
+    @Column(name = "cmp_id")
     private BigInteger cmpId;
 
     @Column(name = "cmp_name")
@@ -65,8 +73,5 @@ public class WorkExp {
 
     @Column(name = "sys_uptime")
     private Date sysUptime;
-
-
-
 }
 

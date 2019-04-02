@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * @author HTtech
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,10 +20,10 @@ public class EduExp {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "no")
-    private Integer number;
+    private Integer no;
 
     @Column(name = "id")
-    private BigInteger userId;
+    private BigInteger userInfoId;
 
     @Column(name = "sch_id")
     private BigInteger schId;
@@ -68,7 +71,7 @@ public class EduExp {
     private Integer schFriends;
 
     @Column(name = "uptime")
-    private Date uptimes;
+    private Date uptime;
 
     @Column(name = "sys_uptime")
     private Date sysUptime;
