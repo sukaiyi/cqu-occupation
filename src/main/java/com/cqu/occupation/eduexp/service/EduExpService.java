@@ -1,5 +1,6 @@
 package com.cqu.occupation.eduexp.service;
 
+import com.cqu.occupation.eduexp.entity.EduExp;
 import com.cqu.occupation.eduexp.vo.EduExpVO;
 
 import java.util.List;
@@ -36,4 +37,10 @@ public interface EduExpService {
      * @return List<WorkExpVO>
      */
     List<EduExpVO> findByUserInfo(Integer userInfoId);
+
+    /**
+     * 获取最高学历
+     * @return 最高学历
+     */
+    List<EduExp> findHighestDegree();
 }

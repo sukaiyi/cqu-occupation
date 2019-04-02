@@ -1,5 +1,6 @@
 package com.cqu.occupation.eduexp.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import com.cqu.occupation.common.utils.EntityVoUtils;
 import com.cqu.occupation.eduexp.entity.EduExp;
 import com.cqu.occupation.eduexp.repository.EduExpRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author sukaiyi
@@ -48,4 +50,19 @@ public class EduExpServiceImpl implements EduExpService {
         List<EduExp> ens = repository.findByUserInfoId(BigInteger.valueOf(userInfoId.longValue()));
         return EntityVoUtils.convert(ens, EduExpVO.class);
     }
+
+    @Override
+    public List<EduExp> findHighestDegree() {
+        List<Object> objs = repository.findHighestDegree();
+        return objs.stream()
+                .map(e -> (Object[]) e)
+                .map(e -> {
+                    EduExp eduExp = new EduExp();
+                    eduExp.setUserInfoId(Convert.toBigInteger(e[0]));
+                    eduExp.setDegree(Convert.toInt(e[1]));
+                    return eduExp;
+                }).collect(Collectors.toList());
+    }
+
+
 }

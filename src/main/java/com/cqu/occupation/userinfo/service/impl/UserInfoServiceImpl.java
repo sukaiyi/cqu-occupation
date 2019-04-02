@@ -3,6 +3,7 @@ package com.cqu.occupation.userinfo.service.impl;
 import com.cqu.occupation.common.query.AdvancedQuery;
 import com.cqu.occupation.common.utils.EntityVoUtils;
 import com.cqu.occupation.common.vo.QueryScheme;
+import com.cqu.occupation.eduexp.entity.EduExp;
 import com.cqu.occupation.eduexp.service.EduExpService;
 import com.cqu.occupation.global.exception.exceptions.BusinessException;
 import com.cqu.occupation.user.vo.UserVO;
@@ -20,7 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -105,5 +108,19 @@ public class UserInfoServiceImpl implements UserInfoService {
         }
         UserInfo retInfo = repository.save(userInfo);
         return detail(retInfo.getId());
+    }
+
+    @Override
+    public Map<String, Object> statistics(Integer id) {
+        List<EduExp> eduExps = eduExpService.findHighestDegree();
+        int total = eduExps.size() == 0 ? 1 : eduExps.size();
+        Map<Integer, List<EduExp>> group = eduExps.stream().collect(Collectors.groupingBy(EduExp::getDegree));
+        Map<Integer, Double> eduDistribution = new HashMap<>(group.size());
+        for (Integer key : group.keySet()) {
+            eduDistribution.put(key, group.get(key).size() * 1.0 / total);
+        }
+        return new HashMap<String, Object>(2) {{
+            put("eduDistribution", eduDistribution);
+        }};
     }
 }

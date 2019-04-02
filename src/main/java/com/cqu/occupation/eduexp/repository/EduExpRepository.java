@@ -43,4 +43,12 @@ public interface EduExpRepository extends JpaRepository<EduExp, Integer> {
     @Query("delete from EduExp t where t.id in (?1)")
     int deleteByIds(List<Integer> ids);
 
+    /**
+     * 获取每个人的最高学历
+     *
+     * @return 最高学历
+     */
+    @Query("select t.userInfoId, max(t.degree) from EduExp t group by t.userInfoId")
+    List<Object> findHighestDegree();
+
 }

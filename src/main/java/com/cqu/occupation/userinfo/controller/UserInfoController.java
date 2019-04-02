@@ -51,4 +51,10 @@ public class UserInfoController {
     public ResultVO detail(@RequestParam Integer id) {
         return ResultVO.ok("操作成功",  userInfoService.detail(id));
     }
+
+    @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})
+    @RequestMapping(value = "statistics", method = RequestMethod.GET)
+    public ResultVO statistics(@RequestParam(required = false) Integer id) {
+        return ResultVO.ok("查询成功", userInfoService.statistics(id));
+    }
 }
