@@ -37,8 +37,8 @@ public class UserInfo {
     @Column(name = "birthday")
     private String birthday;
 
-    @Column(name = "avater")
-    private String avater;
+    @Column(name = "avatar")
+    private String avatar;
 
     @Column(name = "company")
     private String company;
@@ -71,7 +71,7 @@ public class UserInfo {
     private String position;
 
     @Column(name = "province")
-    private String city;
+    private String province;
 
     @Column(name = "location")
     private String location;

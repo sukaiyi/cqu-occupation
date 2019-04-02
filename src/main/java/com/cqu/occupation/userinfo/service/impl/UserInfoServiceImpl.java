@@ -95,4 +95,15 @@ public class UserInfoServiceImpl implements UserInfoService {
         vo.setWorkExp(workExpService.findByUserInfo(vo.getId()));
         return vo;
     }
+
+    @Override
+    public UserInfoVO update(UserInfoVO vo) {
+        UserInfo userInfo = EntityVoUtils.convert(vo, UserInfo.class);
+        UserInfo info = repository.findById(userInfo.getId()).orElse(null);
+        if (info == null) {
+            throw new BusinessException("信息不存在");
+        }
+        UserInfo retInfo = repository.save(userInfo);
+        return detail(retInfo.getId());
+    }
 }

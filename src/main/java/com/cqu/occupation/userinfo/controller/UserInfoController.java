@@ -30,8 +30,14 @@ public class UserInfoController {
 
     @AuthorityRequired(allow = UserType.ADMINISTRATOR)
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ResultVO add(@RequestBody UserInfoVO crawler) {
-        return ResultVO.ok("操作成功", userInfoService.insert(crawler));
+    public ResultVO add(@RequestBody UserInfoVO userInfo) {
+        return ResultVO.ok("操作成功", userInfoService.insert(userInfo));
+    }
+
+    @AuthorityRequired(allow = UserType.ADMINISTRATOR)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ResultVO update(@RequestBody UserInfoVO userInfo) {
+        return ResultVO.ok("操作成功", userInfoService.update(userInfo));
     }
 
     @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})

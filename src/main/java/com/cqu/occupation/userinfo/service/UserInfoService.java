@@ -53,4 +53,11 @@ public interface UserInfoService {
      * @return UserInfoVO
      */
     UserInfoVO detail(Integer id);
+
+    /**
+     * 更新
+     * @param vo userInfo
+     * @return userInfo
+     */
+    UserInfoVO update(UserInfoVO vo);
 }

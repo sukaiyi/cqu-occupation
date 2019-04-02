@@ -23,7 +23,7 @@ public class UserInfoVO {
 	private String gender;
 	private String mobile;
 	private String birthday;
-	private String avater;
+	private String avatar;
 	private String company;
 	private BigInteger cmpId;
 	private String cmpUrl;
@@ -34,7 +34,7 @@ public class UserInfoVO {
 	private String field2;
 	private String profession;
 	private String position;
-	private String city;
+	private String province;
 	private String location;
 	private String address;
 	private String htProvince;
