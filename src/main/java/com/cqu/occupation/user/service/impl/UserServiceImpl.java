@@ -1,19 +1,24 @@
 package com.cqu.occupation.user.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.cqu.occupation.common.query.AdvancedQuery;
 import com.cqu.occupation.common.utils.EntityVoUtils;
 import com.cqu.occupation.common.utils.MD5Util;
+import com.cqu.occupation.common.vo.QueryScheme;
 import com.cqu.occupation.global.exception.exceptions.BusinessException;
 import com.cqu.occupation.global.jwt.JwtUtils;
 import com.cqu.occupation.user.entity.User;
 import com.cqu.occupation.user.repository.UserRepository;
 import com.cqu.occupation.user.service.UserService;
 import com.cqu.occupation.user.vo.UserVO;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +28,13 @@ import java.util.Map;
  * @author sukaiyi
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
 
+    @Autowired
+    private AdvancedQuery<User> query;
     @Autowired
     public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
@@ -38,16 +46,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserVO> findAll(Pageable pageable) {
-        Page<User> page = repository.findAll(pageable);
+    public Page<UserVO> findAll(QueryScheme queryScheme) {
+        Page<User> page = query.query(User.class, repository, queryScheme);
         List<User> entities = page.getContent();
         List<UserVO> vos = EntityVoUtils.convert(entities, UserVO.class);
+        Pageable pageable = PageRequest.of(queryScheme.getPageNum(), queryScheme.getPageSize());
         return new PageImpl<>(vos, pageable, page.getTotalElements());
     }
 
     @Override
     public UserVO insert(UserVO vo) {
         User entity = EntityVoUtils.convert(vo, User.class);
+        entity.setPassword(MD5Util.encode(entity.getPassword()));
         User savedEntity = repository.save(entity);
         return EntityVoUtils.convert(savedEntity, UserVO.class);
     }
@@ -90,5 +100,10 @@ public class UserServiceImpl implements UserService {
         vo.setAvatar("https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png");
         vo.setName(vo.getUsername());
         return vo;
+    }
+
+    @Override
+    public void delete(List<Integer> ids) {
+        repository.deleteByIds(ids);
     }
 }

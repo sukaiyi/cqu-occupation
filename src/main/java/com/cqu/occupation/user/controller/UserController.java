@@ -1,5 +1,6 @@
 package com.cqu.occupation.user.controller;
 
+import com.cqu.occupation.common.vo.QueryScheme;
 import com.cqu.occupation.common.vo.ResultVO;
 import com.cqu.occupation.global.constants.UserType;
 import com.cqu.occupation.user.service.UserService;
@@ -31,14 +32,14 @@ public class UserController {
 
     @AuthorityRequired(allow = UserType.ADMINISTRATOR)
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ResultVO add(@RequestBody List<UserVO> factories) {
-        return ResultVO.ok("操作成功", userService.insert(factories));
+    public ResultVO add(@RequestBody UserVO user) {
+        return ResultVO.ok("操作成功", userService.insert(user));
     }
 
     @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})
     @RequestMapping(value = "all")
-    public ResultVO findAll(@PageableDefault() Pageable pageable) {
-        return ResultVO.ok("查询成功", userService.findAll(pageable));
+    public ResultVO findAll(@RequestBody QueryScheme queryScheme) {
+        return ResultVO.ok("查询成功", userService.findAll(queryScheme));
     }
 
     @AuthorityRequired(allow = {UserType.TOURIST})
@@ -52,6 +53,14 @@ public class UserController {
     public ResultVO login(@RequestHeader("token") String token) {
         return ResultVO.ok("操作成功", userService.currentUser(token));
     }
+
+    @AuthorityRequired(allow = UserType.ADMINISTRATOR)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public ResultVO delete(@RequestBody List<Integer> ids) {
+        userService.delete(ids);
+        return ResultVO.ok("操作成功", null);
+    }
+
 
 
 }

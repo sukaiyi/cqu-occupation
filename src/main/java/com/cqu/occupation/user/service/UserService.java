@@ -1,8 +1,8 @@
 package com.cqu.occupation.user.service;
 
+import com.cqu.occupation.common.vo.QueryScheme;
 import com.cqu.occupation.user.vo.UserVO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +20,10 @@ public interface UserService {
     /**
      * 列表查询全部
      *
-     * @param pageable 分页参数
+     * @param queryScheme 参数
      * @return UserVOs
      */
-    Page<UserVO> findAll(Pageable pageable);
+    Page<UserVO> findAll(QueryScheme queryScheme);
 
     /**
      * 新增一条
@@ -55,4 +55,10 @@ public interface UserService {
      * @return userVO
      */
     UserVO currentUser(String token);
+
+    /**
+     * 按id删除
+     * @param ids ids
+     */
+    void delete(List<Integer> ids);
 }

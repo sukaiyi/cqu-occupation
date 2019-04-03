@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * @author sukaiyi
  */
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
     /**
      * 通过id获取
@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, String> {
      */
     @Override
     @Query("select t from User t where t.id = ?1")
-    Optional<User> findById(String id);
+    Optional<User> findById(Integer id);
 
     /**
      * 通过用户名查找
@@ -53,6 +53,6 @@ public interface UserRepository extends JpaRepository<User, String> {
      */
     @Modifying
     @Query("delete from User t where t.id in (?1)")
-    int deleteByIds(List<String> ids);
+    int deleteByIds(List<Integer> ids);
 
 }
