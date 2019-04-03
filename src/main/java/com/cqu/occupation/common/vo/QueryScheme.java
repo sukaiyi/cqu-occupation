@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class QueryScheme {
-    private Integer pageNum = 1;
+    private Integer pageNum = 0;
     private Integer pageSize = 10;
 
     private List<QueryCondition> condition;

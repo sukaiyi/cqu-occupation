@@ -11,12 +11,8 @@ import com.cqu.occupation.user.entity.User;
 import com.cqu.occupation.user.repository.UserRepository;
 import com.cqu.occupation.user.service.UserService;
 import com.cqu.occupation.user.vo.UserVO;
-import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,14 +44,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<UserVO> findAll(QueryScheme queryScheme) {
         Page<User> page = query.query(User.class, repository, queryScheme);
-        List<User> entities = page.getContent();
-        List<UserVO> vos = EntityVoUtils.convert(entities, UserVO.class);
-        Pageable pageable = PageRequest.of(queryScheme.getPageNum(), queryScheme.getPageSize());
-        return new PageImpl<>(vos, pageable, page.getTotalElements());
+        return page.map(e-> EntityVoUtils.convert(e, UserVO.class));
     }
 
     @Override
     public UserVO insert(UserVO vo) {
+        User entity = EntityVoUtils.convert(vo, User.class);
+        entity.setPassword(MD5Util.encode(entity.getPassword()));
+        User savedEntity = repository.save(entity);
+        return EntityVoUtils.convert(savedEntity, UserVO.class);
+    }
+
+    @Override
+    public UserVO update(UserVO vo) {
         User entity = EntityVoUtils.convert(vo, User.class);
         entity.setPassword(MD5Util.encode(entity.getPassword()));
         User savedEntity = repository.save(entity);

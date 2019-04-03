@@ -51,10 +51,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Page<UserInfoVO> findAll(QueryScheme queryScheme) {
         Page<UserInfo> page = query.query(UserInfo.class, repository, queryScheme);
-        List<UserInfo> entities = page.getContent();
-        List<UserInfoVO> vos = EntityVoUtils.convert(entities, UserInfoVO.class);
-        Pageable pageable = PageRequest.of(queryScheme.getPageNum(), queryScheme.getPageSize());
-        return new PageImpl<>(vos, pageable, page.getTotalElements());
+        return page.map(e-> EntityVoUtils.convert(e, UserInfoVO.class));
     }
 
     @Override

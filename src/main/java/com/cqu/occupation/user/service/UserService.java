@@ -61,4 +61,11 @@ public interface UserService {
      * @param ids ids
      */
     void delete(List<Integer> ids);
+
+    /**
+     * 更新USER
+     * @param user user
+     * @return 更新后的user
+     */
+    UserVO update(UserVO user);
 }

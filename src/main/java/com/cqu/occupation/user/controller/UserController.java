@@ -36,6 +36,12 @@ public class UserController {
         return ResultVO.ok("操作成功", userService.insert(user));
     }
 
+    @AuthorityRequired(allow = UserType.ADMINISTRATOR)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ResultVO update(@RequestBody UserVO user) {
+        return ResultVO.ok("操作成功", userService.update(user));
+    }
+
     @AuthorityRequired(allow = {UserType.ADMINISTRATOR, UserType.MANAGER, UserType.COMMONALTY})
     @RequestMapping(value = "all")
     public ResultVO findAll(@RequestBody QueryScheme queryScheme) {

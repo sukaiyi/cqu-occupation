@@ -49,7 +49,7 @@ public class AdvancedQuery<T> {
             }
         }
         Example<T> example = Example.of(t, matcher);
-        Pageable pageable = PageRequest.of(queryScheme.getPageNum() - 1, queryScheme.getPageSize());
+        Pageable pageable = PageRequest.of(queryScheme.getPageNum(), queryScheme.getPageSize());
         return repository.findAll(example, pageable);
     }
 }

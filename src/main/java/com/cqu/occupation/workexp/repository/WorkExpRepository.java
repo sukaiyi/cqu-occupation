@@ -30,7 +30,7 @@ public interface WorkExpRepository extends JpaRepository<WorkExp, Integer> {
      * @param userInfoId 用户名
      * @return user
      */
-    @Query("select t from WorkExp t where t.userInfoId = ?1")
+    @Query("select t from WorkExp t where t.userInfoId = ?1 order by t.startDate desc")
     List<WorkExp> findByUserInfoId(BigInteger userInfoId);
 
     /**

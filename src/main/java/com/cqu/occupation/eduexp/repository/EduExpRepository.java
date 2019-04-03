@@ -30,7 +30,7 @@ public interface EduExpRepository extends JpaRepository<EduExp, Integer> {
      * @param userInfoId 用户名
      * @return user
      */
-    @Query("select t from EduExp t where t.userInfoId = ?1")
+    @Query("select t from EduExp t where t.userInfoId = ?1 order by t.startDate desc")
     List<EduExp> findByUserInfoId(BigInteger userInfoId);
 
     /**

@@ -40,6 +40,7 @@ public class UserInfoVO {
 	private String htProvince;
 	private String htCity;
 	private String xingzuo;
+	private String city;
 	private Integer interactions;
 	private Integer dongtai;
 	private Integer guandian;

@@ -73,6 +73,9 @@ public class UserInfo {
     @Column(name = "province")
     private String province;
 
+    @Column(name = "city")
+    private String city;
+
     @Column(name = "location")
     private String location;
 
