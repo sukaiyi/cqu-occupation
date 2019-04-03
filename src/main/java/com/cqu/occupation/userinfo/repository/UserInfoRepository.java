@@ -26,6 +26,27 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     Optional<UserInfo> findById(Integer id);
 
     /**
+     * 统计行业
+     * @return 行业
+     */
+    @Query("select t.field,count(t) as num from UserInfo t group by t.field order by num desc")
+    List<Object> statisticsField();
+
+    /**
+     * 统计职业
+     * @return 职业
+     */
+    @Query("select t.profession,count(t) as num from UserInfo t group by t.profession order by num desc")
+    List<Object> statisticsProfession();
+
+    /**
+     * 统计性别
+     * @return 性别
+     */
+    @Query("select t.gender, count(t) as num from UserInfo t group by t.gender order by num desc")
+    List<Object> statisticsGender();
+
+    /**
      * 查询全部
      *
      * @param pageable 分页信息
