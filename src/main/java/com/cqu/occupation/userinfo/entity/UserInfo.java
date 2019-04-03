@@ -155,7 +155,7 @@ public class UserInfo {
     private Date uptime;
 
     @Column(name = "dimission_risk")
-    private Integer dimissionRisk;
+    private String dimissionRisk;
 
 
 }

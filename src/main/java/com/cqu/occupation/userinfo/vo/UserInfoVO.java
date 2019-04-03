@@ -64,7 +64,7 @@ public class UserInfoVO {
 	private String headline;
 	private Integer infoRatio;
 	private Date uptime;
-	private Integer dimissionRisk;
+	private String dimissionRisk;
 	private List<WorkExpVO> workExp;
 	private List<EduExpVO> eduExp;
 
