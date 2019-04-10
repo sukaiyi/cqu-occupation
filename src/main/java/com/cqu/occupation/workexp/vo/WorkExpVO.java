@@ -1,5 +1,6 @@
 package com.cqu.occupation.workexp.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +30,11 @@ public class WorkExpVO {
 	private String cur;
 	private Integer status;
 	private String description;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone="GMT+8")
 	private Date critime;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone="GMT+8")
 	private Date uptime;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone="GMT+8")
 	private Date sysUptime;
 
 }

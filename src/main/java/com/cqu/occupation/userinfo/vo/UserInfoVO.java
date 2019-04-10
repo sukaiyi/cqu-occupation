@@ -2,6 +2,7 @@ package com.cqu.occupation.userinfo.vo;
 
 import com.cqu.occupation.eduexp.vo.EduExpVO;
 import com.cqu.occupation.workexp.vo.WorkExpVO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -63,6 +64,7 @@ public class UserInfoVO {
 	private String oneSentence;
 	private String headline;
 	private Integer infoRatio;
+	@JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone="GMT+8")
 	private Date uptime;
 	private String dimissionRisk;
 	private List<WorkExpVO> workExp;
